@@ -1,35 +1,73 @@
-# Ex10 Applications of Queue – FCFS
-## DATE:
+# Flattening a Nested List Using an Iterator
+## DATE:20/11/25
 ## AIM:
-To write a C function to calculate the turnaround time of each process given their burst time and waiting time in First Come first Serve scheduling algorithm.
+To design and implement a class NestedIterator that flattens a nested list of integers such that all integers can be accessed sequentially using an iterator interface (next() and hasNext()).
 ## Algorithm
 1. Start the program.
-2. Start with process, burst time, and waiting time arrays.
-3. Loop through each process from i = 0 to n-1.
-4. Compute tat[i] = burst_time[i] + wait_time[i]. 
-5. End the program.
+2. Define an interface or class structure for NestedInteger, which can hold either:
+
+A single integer, or
+
+A nested list of integers.
+3. Create the NestedIterator class that:
+
+Uses a stack to keep track of the nested list.
+
+Traverses through the list elements and flattens them.
+4.  Implement the following methods:
+
+hasNext(): Checks if there are more integers to iterate over.
+
+next(): Returns the next integer in sequence.
+5.   In the main program:
+
+Create nested lists of integers.
+
+Use the NestedIterator object to iterate and print all integers sequentially.
 
 ## Program:
 ```
 /*
-Program to find and display the priority of the operator in the given Postfix expression
-Developed by: PAVITHRA S
-RegisterNumber:  212223230147
+Program to Flatten a Nested List Using an Iterator
+Developed by: Pavithra s
+RegisterNumber: 212223230147
 */
-int turnaroundtime( int proc[], int n,int burst_time[], int wait_time[], int tat[]) { 
-   // calculating turnaround time by adding 
-   // burst_time[i] + wait_time[i] 
-   int i; 
-   for ( i = 0; i < n ; i++) 
-   tat[i] = burst_time[i] + wait_time[i]; 
-   return 0; 
-} 
+
+import java.util.*;
+
+public class FlattenNestedListSimple {
+    // Function to flatten a nested list
+    public static List<Integer> flattenList(List<Object> nestedList) {
+        List<Integer> result = new ArrayList<>();
+        for (Object element : nestedList) {
+            if (element instanceof Integer) {
+                result.add((Integer) element);
+            } else if (element instanceof List) {
+                result.addAll(flattenList((List<Object>) element));
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        // Example nested list: [1, [2, [3, 4], 5]]
+        List<Object> nestedList = new ArrayList<>();
+        nestedList.add(1);
+        nestedList.add(Arrays.asList(2, Arrays.asList(3, 4), 5));
+
+        System.out.println("Original Nested List: " + nestedList);
+
+        List<Integer> flattened = flattenList(nestedList);
+
+        System.out.println("Flattened List: " + flattened);
+    }
+}
+
 ```
 
 ## Output:
-
-![image](https://github.com/user-attachments/assets/dfe02c31-9485-4326-ac86-857b617a37b1)
+<img width="540" height="177" alt="Screenshot 2025-11-20 191156" src="https://github.com/user-attachments/assets/5fe391ed-f916-4a10-aecb-2850c067c5bf" />
 
 
 ## Result:
-Thus, the C function to calculate the turnaround time of each process given their burst time and waiting time in First Come first Serve scheduling algorithm is implemented successfully.
+The NestedIterator class successfully flattens a nested list of integers into a single list and provides sequential access using standard iterator methods.
